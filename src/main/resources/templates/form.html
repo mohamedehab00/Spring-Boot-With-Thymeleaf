@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+    <!--    <link rel="stylesheet" th:href="@{/css/form.css}">-->
+</head>
+<body>
+<form th:action="@{/processForm}">
+    Enter your name : <input name="name" type="text"/>
+    <br>
+    Enter your email : <input name="email" type="email"/>
+    <br>
+    <input type="submit" value="Submit"/>
+</form>
+</body>
+</html>

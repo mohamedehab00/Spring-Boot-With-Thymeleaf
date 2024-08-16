@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SpringBootAndThymeleafProjectApplication {
 
     public static void main(String[] args) {
+
         SpringApplication.run(SpringBootAndThymeleafProjectApplication.class, args);
+
     }
 
 }
