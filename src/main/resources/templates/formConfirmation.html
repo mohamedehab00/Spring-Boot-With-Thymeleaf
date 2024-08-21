@@ -7,9 +7,19 @@
 </head>
 <body>
 <form>
-    Your name : <input readonly th:value="${name}" type="text"/>
+    Your name : <input readonly th:value="${user.getName()}" type="text"/>
     <br>
-    your email : <input readonly th:value="${email}" type="email"/>
+    your email : <input readonly th:value="${user.getEmail()}" type="email"/>
+    <br>
+    Enter your age : <input readonly th:value="*{user.getAge()}" type="number"/>
+    <br>
+    your country : <input readonly th:value="${user.getCountry()}" type="text"/>
+    <br>
+    your language : <input readonly th:value="${user.getFavouriteLang()}" type="text"/>
+    <br>
+    your OSs : <input readonly th:value="${user.getFavouriteOs()}" type="text"/>
+    <br>
+    your Course Code : <input readonly th:value="${user.getCourseCode()}" type="text"/>
 </form>
 </body>
 </html>

@@ -6,10 +6,46 @@
     <!--    <link rel="stylesheet" th:href="@{/css/form.css}">-->
 </head>
 <body>
-<form th:action="@{/processForm}">
-    Enter your name : <input name="name" type="text"/>
+<form method="post" th:action="@{/index/processForm}" th:object="${user}">
+    Enter your name : <input name="name" th:field="*{name}" type="text"/>
+    <span class="error"
+          th:errors="*{name}"
+          th:if="${#fields.hasErrors('name')}"
+    >
+    </span>
+
     <br>
-    Enter your email : <input name="email" type="email"/>
+    Enter your email : <input name="email" th:field="*{email}" type="email"/>
+
+    <br>
+    Enter your age : <input name="age" th:field="*{age}" type="number"/>
+    <span class="error"
+          th:errors="*{age}"
+          th:if="${#fields.hasErrors('age')}"
+    >
+    </span>
+
+    <br>
+    <select th:field="*{country}">
+        <option th:each="country, iStat: ${countriesList}" th:id="${iStat.index}" th:text="${country}"
+                th:value="${country}"></option>
+    </select>
+
+    <br>
+    <input th:each="lang, iStat: ${languagesList}" th:field="*{favouriteLang}" th:id="${iStat.index}" th:text="${lang}"
+           th:value="${lang}" type="radio"/>
+
+    <br>
+    <input th:each="os, iStat: ${OSsList}" th:field="*{favouriteOs}" th:id="${iStat.index}" th:text="${os}" th:value="${os}"
+           type="checkbox"/>
+
+    <br>
+    Enter your Course Code : <input name=courseCode th:field="*{courseCode}" type="text"/>
+    <span class="error"
+          th:errors="*{courseCode}"
+          th:if="${#fields.hasErrors('courseCode')}"
+    >
+    </span>
     <br>
     <input type="submit" value="Submit"/>
 </form>
