@@ -32,7 +32,12 @@ public class EmployeeImpl implements EmployeeService {
 
     @Override
     public List<Employee> getAllEmployees() {
-        return getEmployeeRepository().findAll();
+        return getEmployeeRepository().findAllByOrderByFirstNameAscSecondNameAsc();
+    }
+
+    @Override
+    public void saveEmployee(Employee employee) {
+        getEmployeeRepository().save(employee);
     }
 
     @Override
