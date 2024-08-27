@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Employees</title>
@@ -10,10 +10,16 @@
 <body>
 <h1>Employee Directory</h1>
 <hr>
-<button class="btn btn-primary" type="button">
+<h2 sec:authentication="principal.username"></h2>
+<h2 sec:authentication="principal.authorities"></h2>
+<hr>
+<button class="btn btn-primary" sec:authorize="hasAnyRole('MANAGER','ADMIN')" type="button">
     <a class="anc" th:href="@{/employees/employeeForm}">Add Employee</a>
 </button>
 <hr>
+<div class="container">
+    <!-- Content here -->
+
 <table class="table">
     <thead>
     <tr>
@@ -21,8 +27,8 @@
         <th scope="col">First</th>
         <th scope="col">Last</th>
         <th scope="col">Email</th>
-        <th scope="col">Update</th>
-        <th scope="col">Delete</th>
+        <th scope="col" sec:authorize="hasAnyRole('MANAGER','ADMIN')">Update</th>
+        <th scope="col" sec:authorize="hasAnyRole('MANAGER','ADMIN')">Delete</th>
     </tr>
     </thead>
     <tbody>
@@ -31,12 +37,12 @@
         <td th:text="${employee.getFirstName()}" th:value="${employee.getFirstName()}"></td>
         <td th:text="${employee.getSecondName()}" th:value="${employee.getSecondName()}"></td>
         <td th:text="${employee.getEmail()}" th:value="${employee.getEmail()}"></td>
-        <td>
+        <td sec:authorize="hasAnyRole('MANAGER','ADMIN')">
             <button class="btn btn-warning" type="button"><a class="anc"
                                                              th:href="@{/employees/update(id=${employee.getId()})}">Update</a>
             </button>
         </td>
-        <td>
+        <td sec:authorize="hasAnyRole('MANAGER','ADMIN')">
             <button class="btn btn-danger" type="button"><a class="anc"
                                                             th:href="@{/employees/delete(id=${employee.getId()})}">Delete</a>
             </button>
@@ -44,6 +50,11 @@
     </tr>
     </tbody>
 </table>
+</div>
+<hr>
+<form method="post" th:action="@{/logout}">
+    <button class="btn btn-primary" type="submit">Logout</button>
+</form>
 <script crossorigin="anonymous"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
